@@ -9,7 +9,8 @@ if (isset($_POST['nim']) && isset($_POST['nama'])) {
     $nama = $_POST['nama'];
     $program_studi = $_POST['program_studi'];
 
-    $insert = $mysqli->query("INSERT INTO students (nim, nama, study_program_id) VALUES('$nim', '$nama', $program_studi)");
+    $insert = $mysqli->query("INSERT INTO students (nim, nama, study_program_id) 
+                                VALUES('$nim', '$nama', $program_studi)");
     if ($insert) {
         header("Location: mahasiswa.php");
         exit();
@@ -30,7 +31,7 @@ if (isset($_POST['nim']) && isset($_POST['nama'])) {
 </head>
 <body>
     <div class="container">
-        <h1 class="text-center">Form Tambah Mahasiswa KA 2021</h1>
+        <h1 class="text-center">Form Tambah Mahasiswa 2021</h1>
         <form method="POST">
             <div class="mb-3">
                 <label for="nim" class="form-label">NIM</label>
