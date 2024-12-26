@@ -1,4 +1,5 @@
 <?php
+session_start();
 
 $mysqli = new mysqli('localhost', 'root', '', 'tedc');
 
@@ -12,6 +13,8 @@ if (isset($_POST['nim']) && isset($_POST['nama'])) {
     $insert = $mysqli->query("INSERT INTO students (nim, nama, study_program_id) 
                                 VALUES('$nim', '$nama', $program_studi)");
     if ($insert) {
+        $_SESSION['success'] = true;
+        $_SESSION['message'] = 'Data berhasil ditambahkan!';
         header("Location: mahasiswa.php");
         exit();
     }

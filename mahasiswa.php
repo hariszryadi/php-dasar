@@ -1,4 +1,5 @@
 <?php
+session_start();
 
 $mysqli = new mysqli('localhost', 'root', '', 'tedc');
 $result = $mysqli->query("SELECT students.nim, students.nama, study_programs.name AS study_program 
@@ -18,9 +19,17 @@ $result = $mysqli->query("SELECT students.nim, students.nama, study_programs.nam
 <body>
     <div class="container">
         <h1 class="text-center">Data Mahasiswa 2021</h1>
+        
+        <?php if (isset($_SESSION['success']) && $_SESSION['success'] == true) { ?>
+            <div class="alert alert-success" role="alert">
+                <?= $_SESSION['message'] ?>
+            </div>
+        <?php } ?>
+
         <div class="mb-3">
             <a href="tambah_mahasiswa.php" class="btn btn-primary">Tambah Mahasiswa</a>
         </div>
+
         <table class="table table-bordered table-hover">
             <tr>
                 <th>No</th>
@@ -48,3 +57,9 @@ $result = $mysqli->query("SELECT students.nim, students.nama, study_programs.nam
     </div>
 </body>
 </html>
+
+<?php
+
+session_unset();
+
+?>
