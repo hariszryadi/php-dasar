@@ -1,6 +1,13 @@
 <?php
 session_start();
 
+if (!isset($_SESSION['login'])) {
+    if ($_SESSION['login'] != true) {
+        header("Location: login.php");
+        exit;
+    }
+}
+
 $mysqli = new mysqli('localhost', 'root', '', 'tedc');
 $result = $mysqli->query("SELECT students.nim, students.nama, study_programs.name AS study_program 
                             FROM students LEFT JOIN study_programs ON students.study_program_id = study_programs.id");
@@ -28,6 +35,7 @@ $result = $mysqli->query("SELECT students.nim, students.nama, study_programs.nam
 
         <div class="mb-3">
             <a href="tambah_mahasiswa.php" class="btn btn-primary">Tambah Mahasiswa</a>
+            <a href="logout.php" class="btn btn-warning">Logout</a>
         </div>
 
         <table class="table table-bordered table-hover">
@@ -60,6 +68,8 @@ $result = $mysqli->query("SELECT students.nim, students.nama, study_programs.nam
 
 <?php
 
-session_unset();
+// session_unset();
+unset($_SESSION['success']);
+unset($_SESSION['message']);
 
 ?>
